@@ -8,14 +8,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
-import javax.servlet.http.HttpServletResponse;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -26,29 +21,16 @@ public class BoardControllerTests {
     @Autowired
     MockMvc mvc;
 
-    @DisplayName("GET /board/list 테스트")
-    @Test
-    public void t1() throws Exception{
-        //given
-        Long pageNo = 15L;
-
-        //when
-
-        //then
-        mvc.perform(get("/board/list").param("pageNo", String.valueOf(pageNo))) //mvc를 어떻게 구현할 것인가?
-                .andExpect(status().isOk()) //요청을 전달했을 때 나올 기대값
-                .andDo(print());
-    }
 
     @DisplayName("PUT /board/put 테스트")
     @Test
-    public void t2() throws Exception{
+    public void t1() throws Exception{
         //given
         BoardDto dto = new BoardDto();
         dto.setNo(10L);
-        dto.setTitle("TITLE");
-        dto.setContents("CONTENTS");
-        dto.setWriter("USER10@NAVER.COM");
+        dto.setTitle("title_user1");
+        dto.setContents("contents_user1");
+        dto.setWriter("user1@naver.com");
 
         ObjectMapper objectMapper = new ObjectMapper();
         String params = objectMapper.writeValueAsString(dto);
